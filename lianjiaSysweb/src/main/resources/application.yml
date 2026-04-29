@@ -1,0 +1,39 @@
+server:
+  port: 8080
+
+spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/lianjia_env?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+    username: root
+    password: 123456
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+    serialization:
+      write-dates-as-timestamps: false
+
+mybatis:
+  mapper-locations: classpath:mapper/**/*.xml
+  type-aliases-package: com.lianjia.entity
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+logging:
+  level:
+    com.lianjia: debug
+    org.springframework.web: info
+
+swagger:
+  enabled: true
+  title: 恋家环保小程序API文档
+  description: 恋家环保小程序后端API接口文档
+  version: 1.0.0
+  contact:
+    name: 恋家环保
+    email: support@lianjia.com
+  base-package: com.lianjia.controller

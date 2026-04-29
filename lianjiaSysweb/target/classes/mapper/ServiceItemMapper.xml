@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lianjia.mapper.ServiceItemMapper">
+
+    <resultMap id="BaseResultMap" type="com.lianjia.entity.ServiceItem">
+        <id column="id" property="id"/>
+        <result column="category_id" property="categoryId"/>
+        <result column="service_name" property="serviceName"/>
+        <result column="service_code" property="serviceCode"/>
+        <result column="service_icon" property="serviceIcon"/>
+        <result column="service_images" property="serviceImages"/>
+        <result column="service_desc" property="serviceDesc"/>
+        <result column="service_detail" property="serviceDetail"/>
+        <result column="price" property="price"/>
+        <result column="market_price" property="marketPrice"/>
+        <result column="unit" property="unit"/>
+        <result column="duration" property="duration"/>
+        <result column="sort" property="sort"/>
+        <result column="sales_count" property="salesCount"/>
+        <result column="status" property="status"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, category_id, service_name, service_code, service_icon, service_images, 
+        service_desc, service_detail, price, market_price, unit, duration, sort, 
+        sales_count, status, create_time, update_time
+    </sql>
+
+    <select id="selectById" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM service_item
+        WHERE id = #{id} AND status = 1
+    </select>
+
+    <select id="selectByCategoryId" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM service_item
+        WHERE category_id = #{categoryId} AND status = 1
+        ORDER BY sort ASC, sales_count DESC, create_time DESC
+    </select>
+
+    <select id="selectByPackageId" resultMap="BaseResultMap">
+        SELECT si.*
+        FROM service_item si
+        INNER JOIN package_service_rel psr ON si.id = psr.service_id
+        WHERE psr.package_id = #{packageId} AND si.status = 1
+        ORDER BY psr.sort ASC
+    </select>
+
+    <select id="selectList" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM service_item
+        WHERE 1=1
+        <if test="categoryId != null">
+            AND category_id = #{categoryId}
+        </if>
+        <if test="serviceName != null and serviceName != ''">
+            AND service_name LIKE CONCAT('%', #{serviceName}, '%')
+        </if>
+        <if test="serviceCode != null and serviceCode != ''">
+            AND service_code = #{serviceCode}
+        </if>
+        <if test="status != null">
+            AND status = #{status}
+        </if>
+        ORDER BY sort ASC, sales_count DESC, create_time DESC
+    </select>
+
+    <select id="selectPage" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM service_item
+        WHERE 1=1
+        <if test="service.categoryId != null">
+            AND category_id = #{service.categoryId}
+        </if>
+        <if test="service.serviceName != null and service.serviceName != ''">
+            AND service_name LIKE CONCAT('%', #{service.serviceName}, '%')
+        </if>
+        <if test="service.status != null">
+            AND status = #{service.status}
+        </if>
+        ORDER BY sort ASC, sales_count DESC, create_time DESC
+        LIMIT #{offset}, #{pageSize}
+    </select>
+
+    <select id="selectCount" resultType="long">
+        SELECT COUNT(*)
+        FROM service_item
+        WHERE 1=1
+        <if test="categoryId != null">
+            AND category_id = #{categoryId}
+        </if>
+        <if test="serviceName != null and serviceName != ''">
+            AND service_name LIKE CONCAT('%', #{serviceName}, '%')
+        </if>
+        <if test="status != null">
+            AND status = #{status}
+        </if>
+    </select>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO service_item (category_id, service_name, service_code, service_icon, 
+            service_images, service_desc, service_detail, price, market_price, unit, 
+            duration, sort, sales_count, status)
+        VALUES (#{categoryId}, #{serviceName}, #{serviceCode}, #{serviceIcon}, 
+            #{serviceImages}, #{serviceDesc}, #{serviceDetail}, #{price}, #{marketPrice}, #{unit}, 
+            #{duration}, #{sort}, #{salesCount}, #{status})
+    </insert>
+
+    <update id="update">
+        UPDATE service_item
+        SET
+            <if test="categoryId != null">category_id = #{categoryId},</if>
+            <if test="serviceName != null">service_name = #{serviceName},</if>
+            <if test="serviceCode != null">service_code = #{serviceCode},</if>
+            <if test="serviceIcon != null">service_icon = #{serviceIcon},</if>
+            <if test="serviceImages != null">service_images = #{serviceImages},</if>
+            <if test="serviceDesc != null">service_desc = #{serviceDesc},</if>
+            <if test="serviceDetail != null">service_detail = #{serviceDetail},</if>
+            <if test="price != null">price = #{price},</if>
+            <if test="marketPrice != null">market_price = #{marketPrice},</if>
+            <if test="unit != null">unit = #{unit},</if>
+            <if test="duration != null">duration = #{duration},</if>
+            <if test="sort != null">sort = #{sort},</if>
+            <if test="salesCount != null">sales_count = #{salesCount},</if>
+            <if test="status != null">status = #{status},</if>
+            update_time = CURRENT_TIMESTAMP
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteById">
+        UPDATE service_item SET status = 0 WHERE id = #{id}
+    </delete>
+
+    <update id="updateStatus">
+        UPDATE service_item SET status = #{status}, update_time = CURRENT_TIMESTAMP WHERE id = #{id}
+    </update>
+
+    <update id="incrementSales">
+        UPDATE service_item SET sales_count = sales_count + #{count}, update_time = CURRENT_TIMESTAMP WHERE id = #{id}
+    </update>
+
+</mapper>

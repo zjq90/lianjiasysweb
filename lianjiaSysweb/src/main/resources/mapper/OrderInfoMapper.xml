@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lianjia.mapper.OrderInfoMapper">
+
+    <resultMap id="BaseResultMap" type="com.lianjia.entity.OrderInfo">
+        <id column="id" property="id"/>
+        <result column="order_no" property="orderNo"/>
+        <result column="user_id" property="userId"/>
+        <result column="order_type" property="orderType"/>
+        <result column="service_id" property="serviceId"/>
+        <result column="package_id" property="packageId"/>
+        <result column="address_id" property="addressId"/>
+        <result column="contact_name" property="contactName"/>
+        <result column="contact_phone" property="contactPhone"/>
+        <result column="service_date" property="serviceDate"/>
+        <result column="service_time" property="serviceTime"/>
+        <result column="quantity" property="quantity"/>
+        <result column="original_amount" property="originalAmount"/>
+        <result column="discount_amount" property="discountAmount"/>
+        <result column="coupon_amount" property="couponAmount"/>
+        <result column="pay_amount" property="payAmount"/>
+        <result column="pay_type" property="payType"/>
+        <result column="pay_time" property="payTime"/>
+        <result column="order_status" property="orderStatus"/>
+        <result column="cancel_reason" property="cancelReason"/>
+        <result column="cancel_time" property="cancelTime"/>
+        <result column="remark" property="remark"/>
+        <result column="status" property="status"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, order_no, user_id, order_type, service_id, package_id, address_id, 
+        contact_name, contact_phone, service_date, service_time, quantity, 
+        original_amount, discount_amount, coupon_amount, pay_amount, pay_type, 
+        pay_time, order_status, cancel_reason, cancel_time, remark, status, 
+        create_time, update_time
+    </sql>
+
+    <select id="selectById" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM order_info
+        WHERE id = #{id} AND status = 1
+    </select>
+
+    <select id="selectByOrderNo" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM order_info
+        WHERE order_no = #{orderNo} AND status = 1
+    </select>
+
+    <select id="selectByUserId" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM order_info
+        WHERE user_id = #{userId} AND status = 1
+        ORDER BY create_time DESC
+    </select>
+
+    <select id="selectByUserIdAndStatus" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM order_info
+        WHERE user_id = #{userId} AND order_status = #{status} AND status = 1
+        ORDER BY create_time DESC
+    </select>
+
+    <select id="selectList" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM order_info
+        WHERE 1=1
+        <if test="userId != null">
+            AND user_id = #{userId}
+        </if>
+        <if test="orderNo != null and orderNo != ''">
+            AND order_no = #{orderNo}
+        </if>
+        <if test="orderStatus != null and orderStatus != ''">
+            AND order_status = #{orderStatus}
+        </if>
+        <if test="status != null">
+            AND status = #{status}
+        </if>
+        ORDER BY create_time DESC
+    </select>
+
+    <select id="selectPage" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM order_info
+        WHERE 1=1
+        <if test="order.userId != null">
+            AND user_id = #{order.userId}
+        </if>
+        <if test="order.orderNo != null and order.orderNo != ''">
+            AND order_no = #{order.orderNo}
+        </if>
+        <if test="order.orderStatus != null and order.orderStatus != ''">
+            AND order_status = #{order.orderStatus}
+        </if>
+        <if test="order.status != null">
+            AND status = #{order.status}
+        </if>
+        ORDER BY create_time DESC
+        LIMIT #{offset}, #{pageSize}
+    </select>
+
+    <select id="selectCount" resultType="long">
+        SELECT COUNT(*)
+        FROM order_info
+        WHERE 1=1
+        <if test="userId != null">
+            AND user_id = #{userId}
+        </if>
+        <if test="orderNo != null and orderNo != ''">
+            AND order_no = #{orderNo}
+        </if>
+        <if test="orderStatus != null and orderStatus != ''">
+            AND order_status = #{orderStatus}
+        </if>
+        <if test="status != null">
+            AND status = #{status}
+        </if>
+    </select>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO order_info (order_no, user_id, order_type, service_id, package_id, 
+            address_id, contact_name, contact_phone, service_date, service_time, 
+            quantity, original_amount, discount_amount, coupon_amount, pay_amount, 
+            pay_type, pay_time, order_status, cancel_reason, cancel_time, remark, status)
+        VALUES (#{orderNo}, #{userId}, #{orderType}, #{serviceId}, #{packageId}, 
+            #{addressId}, #{contactName}, #{contactPhone}, #{serviceDate}, #{serviceTime}, 
+            #{quantity}, #{originalAmount}, #{discountAmount}, #{couponAmount}, #{payAmount}, 
+            #{payType}, #{payTime}, #{orderStatus}, #{cancelReason}, #{cancelTime}, #{remark}, #{status})
+    </insert>
+
+    <update id="update">
+        UPDATE order_info
+        SET
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="orderType != null">order_type = #{orderType},</if>
+            <if test="serviceId != null">service_id = #{serviceId},</if>
+            <if test="packageId != null">package_id = #{packageId},</if>
+            <if test="addressId != null">address_id = #{addressId},</if>
+            <if test="contactName != null">contact_name = #{contactName},</if>
+            <if test="contactPhone != null">contact_phone = #{contactPhone},</if>
+            <if test="serviceDate != null">service_date = #{serviceDate},</if>
+            <if test="serviceTime != null">service_time = #{serviceTime},</if>
+            <if test="quantity != null">quantity = #{quantity},</if>
+            <if test="originalAmount != null">original_amount = #{originalAmount},</if>
+            <if test="discountAmount != null">discount_amount = #{discountAmount},</if>
+            <if test="couponAmount != null">coupon_amount = #{couponAmount},</if>
+            <if test="payAmount != null">pay_amount = #{payAmount},</if>
+            <if test="payType != null">pay_type = #{payType},</if>
+            <if test="payTime != null">pay_time = #{payTime},</if>
+            <if test="orderStatus != null">order_status = #{orderStatus},</if>
+            <if test="cancelReason != null">cancel_reason = #{cancelReason},</if>
+            <if test="cancelTime != null">cancel_time = #{cancelTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="status != null">status = #{status},</if>
+            update_time = CURRENT_TIMESTAMP
+        WHERE id = #{id}
+    </update>
+
+    <update id="updateStatus">
+        UPDATE order_info SET order_status = #{status}, update_time = CURRENT_TIMESTAMP WHERE id = #{id}
+    </update>
+
+    <delete id="deleteById">
+        UPDATE order_info SET status = 0 WHERE id = #{id}
+    </delete>
+
+</mapper>

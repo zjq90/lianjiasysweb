@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lianjia.mapper.TaskOrderMapper">
+
+    <resultMap id="BaseResultMap" type="com.lianjia.entity.TaskOrder">
+        <id column="id" property="id"/>
+        <result column="task_no" property="taskNo"/>
+        <result column="order_id" property="orderId"/>
+        <result column="worker_id" property="workerId"/>
+        <result column="task_status" property="taskStatus"/>
+        <result column="accept_time" property="acceptTime"/>
+        <result column="start_time" property="startTime"/>
+        <result column="complete_time" property="completeTime"/>
+        <result column="estimated_arrival_time" property="estimatedArrivalTime"/>
+        <result column="actual_arrival_time" property="actualArrivalTime"/>
+        <result column="note" property="note"/>
+        <result column="status" property="status"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, task_no, order_id, worker_id, task_status, accept_time, start_time, 
+        complete_time, estimated_arrival_time, actual_arrival_time, note, 
+        status, create_time, update_time
+    </sql>
+
+    <select id="selectById" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM task_order
+        WHERE id = #{id} AND status = 1
+    </select>
+
+    <select id="selectByTaskNo" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM task_order
+        WHERE task_no = #{taskNo} AND status = 1
+    </select>
+
+    <select id="selectByOrderId" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM task_order
+        WHERE order_id = #{orderId} AND status = 1
+        LIMIT 1
+    </select>
+
+    <select id="selectByWorkerId" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM task_order
+        WHERE worker_id = #{workerId} AND status = 1
+        ORDER BY create_time DESC
+    </select>
+
+    <select id="selectByWorkerIdAndStatus" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM task_order
+        WHERE worker_id = #{workerId} AND task_status = #{status} AND status = 1
+        ORDER BY create_time DESC
+    </select>
+
+    <select id="selectList" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM task_order
+        WHERE 1=1
+        <if test="workerId != null">
+            AND worker_id = #{workerId}
+        </if>
+        <if test="orderId != null">
+            AND order_id = #{orderId}
+        </if>
+        <if test="taskNo != null and taskNo != ''">
+            AND task_no = #{taskNo}
+        </if>
+        <if test="taskStatus != null and taskStatus != ''">
+            AND task_status = #{taskStatus}
+        </if>
+        <if test="status != null">
+            AND status = #{status}
+        </if>
+        ORDER BY create_time DESC
+    </select>
+
+    <select id="selectPage" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM task_order
+        WHERE 1=1
+        <if test="task.workerId != null">
+            AND worker_id = #{task.workerId}
+        </if>
+        <if test="task.orderId != null">
+            AND order_id = #{task.orderId}
+        </if>
+        <if test="task.taskNo != null and task.taskNo != ''">
+            AND task_no = #{task.taskNo}
+        </if>
+        <if test="task.taskStatus != null and task.taskStatus != ''">
+            AND task_status = #{task.taskStatus}
+        </if>
+        <if test="task.status != null">
+            AND status = #{task.status}
+        </if>
+        ORDER BY create_time DESC
+        LIMIT #{offset}, #{pageSize}
+    </select>
+
+    <select id="selectCount" resultType="long">
+        SELECT COUNT(*)
+        FROM task_order
+        WHERE 1=1
+        <if test="workerId != null">
+            AND worker_id = #{workerId}
+        </if>
+        <if test="orderId != null">
+            AND order_id = #{orderId}
+        </if>
+        <if test="taskNo != null and taskNo != ''">
+            AND task_no = #{taskNo}
+        </if>
+        <if test="taskStatus != null and taskStatus != ''">
+            AND task_status = #{taskStatus}
+        </if>
+        <if test="status != null">
+            AND status = #{status}
+        </if>
+    </select>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO task_order (task_no, order_id, worker_id, task_status, 
+            accept_time, start_time, complete_time, estimated_arrival_time, 
+            actual_arrival_time, note, status)
+        VALUES (#{taskNo}, #{orderId}, #{workerId}, #{taskStatus}, 
+            #{acceptTime}, #{startTime}, #{completeTime}, #{estimatedArrivalTime}, 
+            #{actualArrivalTime}, #{note}, #{status})
+    </insert>
+
+    <update id="update">
+        UPDATE task_order
+        SET
+            <if test="taskNo != null">task_no = #{taskNo},</if>
+            <if test="orderId != null">order_id = #{orderId},</if>
+            <if test="workerId != null">worker_id = #{workerId},</if>
+            <if test="taskStatus != null">task_status = #{taskStatus},</if>
+            <if test="acceptTime != null">accept_time = #{acceptTime},</if>
+            <if test="startTime != null">start_time = #{startTime},</if>
+            <if test="completeTime != null">complete_time = #{completeTime},</if>
+            <if test="estimatedArrivalTime != null">estimated_arrival_time = #{estimatedArrivalTime},</if>
+            <if test="actualArrivalTime != null">actual_arrival_time = #{actualArrivalTime},</if>
+            <if test="note != null">note = #{note},</if>
+            <if test="status != null">status = #{status},</if>
+            update_time = CURRENT_TIMESTAMP
+        WHERE id = #{id}
+    </update>
+
+    <update id="updateStatus">
+        UPDATE task_order SET task_status = #{status}, update_time = CURRENT_TIMESTAMP WHERE id = #{id}
+    </update>
+
+    <delete id="deleteById">
+        UPDATE task_order SET status = 0 WHERE id = #{id}
+    </delete>
+
+</mapper>

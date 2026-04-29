@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lianjia.mapper.UserPackageCardMapper">
+
+    <resultMap id="BaseResultMap" type="com.lianjia.entity.UserPackageCard">
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="package_id" property="packageId"/>
+        <result column="order_id" property="orderId"/>
+        <result column="total_count" property="totalCount"/>
+        <result column="used_count" property="usedCount"/>
+        <result column="valid_start_date" property="validStartDate"/>
+        <result column="valid_end_date" property="validEndDate"/>
+        <result column="status" property="status"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, user_id, package_id, order_id, total_count, used_count, 
+        valid_start_date, valid_end_date, status, create_time, update_time
+    </sql>
+
+    <select id="selectById" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM user_package_card
+        WHERE id = #{id}
+    </select>
+
+    <select id="selectByUserId" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM user_package_card
+        WHERE user_id = #{userId}
+        ORDER BY create_time DESC
+    </select>
+
+    <select id="selectValidByUserId" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM user_package_card
+        WHERE user_id = #{userId} 
+        AND status = 1
+        ORDER BY create_time DESC
+    </select>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO user_package_card (user_id, package_id, order_id, total_count, 
+            used_count, valid_start_date, valid_end_date, status)
+        VALUES (#{userId}, #{packageId}, #{orderId}, #{totalCount}, 
+            #{usedCount}, #{validStartDate}, #{validEndDate}, #{status})
+    </insert>
+
+    <update id="update">
+        UPDATE user_package_card
+        SET
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="packageId != null">package_id = #{packageId},</if>
+            <if test="orderId != null">order_id = #{orderId},</if>
+            <if test="totalCount != null">total_count = #{totalCount},</if>
+            <if test="usedCount != null">used_count = #{usedCount},</if>
+            <if test="validStartDate != null">valid_start_date = #{validStartDate},</if>
+            <if test="validEndDate != null">valid_end_date = #{validEndDate},</if>
+            <if test="status != null">status = #{status},</if>
+            update_time = CURRENT_TIMESTAMP
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteById">
+        UPDATE user_package_card SET status = 0 WHERE id = #{id}
+    </delete>
+
+    <update id="incrementUsedCount">
+        UPDATE user_package_card SET used_count = used_count + 1, update_time = CURRENT_TIMESTAMP WHERE id = #{id}
+    </update>
+
+</mapper>

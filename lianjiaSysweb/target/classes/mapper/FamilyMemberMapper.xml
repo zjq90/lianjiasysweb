@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lianjia.mapper.FamilyMemberMapper">
+
+    <resultMap id="BaseResultMap" type="com.lianjia.entity.FamilyMember">
+        <id column="id" property="id"/>
+        <result column="family_id" property="familyId"/>
+        <result column="member_type" property="memberType"/>
+        <result column="member_name" property="memberName"/>
+        <result column="gender" property="gender"/>
+        <result column="birthday" property="birthday"/>
+        <result column="health_status" property="healthStatus"/>
+        <result column="note" property="note"/>
+        <result column="status" property="status"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, family_id, member_type, member_name, gender, birthday, health_status, 
+        note, status, create_time, update_time
+    </sql>
+
+    <select id="selectById" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM family_member
+        WHERE id = #{id} AND status = 1
+    </select>
+
+    <select id="selectByFamilyId" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM family_member
+        WHERE family_id = #{familyId} AND status = 1
+        ORDER BY create_time ASC
+    </select>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO family_member (family_id, member_type, member_name, gender, 
+            birthday, health_status, note, status)
+        VALUES (#{familyId}, #{memberType}, #{memberName}, #{gender}, 
+            #{birthday}, #{healthStatus}, #{note}, #{status})
+    </insert>
+
+    <update id="update">
+        UPDATE family_member
+        SET
+            <if test="memberType != null">member_type = #{memberType},</if>
+            <if test="memberName != null">member_name = #{memberName},</if>
+            <if test="gender != null">gender = #{gender},</if>
+            <if test="birthday != null">birthday = #{birthday},</if>
+            <if test="healthStatus != null">health_status = #{healthStatus},</if>
+            <if test="note != null">note = #{note},</if>
+            <if test="status != null">status = #{status},</if>
+            update_time = CURRENT_TIMESTAMP
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteById">
+        UPDATE family_member SET status = 0 WHERE id = #{id}
+    </delete>
+
+    <delete id="deleteByFamilyId">
+        UPDATE family_member SET status = 0 WHERE family_id = #{familyId}
+    </delete>
+
+</mapper>

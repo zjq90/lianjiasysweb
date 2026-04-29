@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lianjia.mapper.ServicePackageMapper">
+
+    <resultMap id="BaseResultMap" type="com.lianjia.entity.ServicePackage">
+        <id column="id" property="id"/>
+        <result column="package_name" property="packageName"/>
+        <result column="package_code" property="packageCode"/>
+        <result column="package_icon" property="packageIcon"/>
+        <result column="package_images" property="packageImages"/>
+        <result column="package_desc" property="packageDesc"/>
+        <result column="package_detail" property="packageDetail"/>
+        <result column="original_price" property="originalPrice"/>
+        <result column="sale_price" property="salePrice"/>
+        <result column="total_count" property="totalCount"/>
+        <result column="valid_days" property="validDays"/>
+        <result column="valid_start_date" property="validStartDate"/>
+        <result column="valid_end_date" property="validEndDate"/>
+        <result column="sort" property="sort"/>
+        <result column="sales_count" property="salesCount"/>
+        <result column="status" property="status"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, package_name, package_code, package_icon, package_images, package_desc, 
+        package_detail, original_price, sale_price, total_count, valid_days, 
+        valid_start_date, valid_end_date, sort, sales_count, status, create_time, update_time
+    </sql>
+
+    <select id="selectById" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM service_package
+        WHERE id = #{id} AND status = 1
+    </select>
+
+    <select id="selectList" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM service_package
+        WHERE 1=1
+        <if test="packageName != null and packageName != ''">
+            AND package_name LIKE CONCAT('%', #{packageName}, '%')
+        </if>
+        <if test="packageCode != null and packageCode != ''">
+            AND package_code = #{packageCode}
+        </if>
+        <if test="status != null">
+            AND status = #{status}
+        </if>
+        ORDER BY sort ASC, sales_count DESC, create_time DESC
+    </select>
+
+    <select id="selectPage" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM service_package
+        WHERE 1=1
+        <if test="pkg.packageName != null and pkg.packageName != ''">
+            AND package_name LIKE CONCAT('%', #{pkg.packageName}, '%')
+        </if>
+        <if test="pkg.packageCode != null and pkg.packageCode != ''">
+            AND package_code = #{pkg.packageCode}
+        </if>
+        <if test="pkg.status != null">
+            AND status = #{pkg.status}
+        </if>
+        ORDER BY sort ASC, sales_count DESC, create_time DESC
+        LIMIT #{offset}, #{pageSize}
+    </select>
+
+    <select id="selectByTagIds" resultMap="BaseResultMap">
+        SELECT DISTINCT sp.*
+        FROM service_package sp
+        INNER JOIN package_tag_rel ptr ON sp.id = ptr.package_id
+        WHERE ptr.tag_id IN 
+        <foreach collection="tagIds" item="tagId" open="(" separator="," close=")">
+            #{tagId}
+        </foreach>
+        AND sp.status = 1
+        ORDER BY sp.sort ASC, sp.sales_count DESC
+    </select>
+
+    <select id="selectCount" resultType="long">
+        SELECT COUNT(*)
+        FROM service_package
+        WHERE 1=1
+        <if test="packageName != null and packageName != ''">
+            AND package_name LIKE CONCAT('%', #{packageName}, '%')
+        </if>
+        <if test="packageCode != null and packageCode != ''">
+            AND package_code = #{packageCode}
+        </if>
+        <if test="status != null">
+            AND status = #{status}
+        </if>
+    </select>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO service_package (package_name, package_code, package_icon, package_images, 
+            package_desc, package_detail, original_price, sale_price, total_count, valid_days, 
+            valid_start_date, valid_end_date, sort, sales_count, status)
+        VALUES (#{packageName}, #{packageCode}, #{packageIcon}, #{packageImages}, 
+            #{packageDesc}, #{packageDetail}, #{originalPrice}, #{salePrice}, #{totalCount}, #{validDays}, 
+            #{validStartDate}, #{validEndDate}, #{sort}, #{salesCount}, #{status})
+    </insert>
+
+    <update id="update">
+        UPDATE service_package
+        SET
+            <if test="packageName != null">package_name = #{packageName},</if>
+            <if test="packageCode != null">package_code = #{packageCode},</if>
+            <if test="packageIcon != null">package_icon = #{packageIcon},</if>
+            <if test="packageImages != null">package_images = #{packageImages},</if>
+            <if test="packageDesc != null">package_desc = #{packageDesc},</if>
+            <if test="packageDetail != null">package_detail = #{packageDetail},</if>
+            <if test="originalPrice != null">original_price = #{originalPrice},</if>
+            <if test="salePrice != null">sale_price = #{salePrice},</if>
+            <if test="totalCount != null">total_count = #{totalCount},</if>
+            <if test="validDays != null">valid_days = #{validDays},</if>
+            <if test="validStartDate != null">valid_start_date = #{validStartDate},</if>
+            <if test="validEndDate != null">valid_end_date = #{validEndDate},</if>
+            <if test="sort != null">sort = #{sort},</if>
+            <if test="salesCount != null">sales_count = #{salesCount},</if>
+            <if test="status != null">status = #{status},</if>
+            update_time = CURRENT_TIMESTAMP
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteById">
+        UPDATE service_package SET status = 0 WHERE id = #{id}
+    </delete>
+
+    <update id="updateStatus">
+        UPDATE service_package SET status = #{status}, update_time = CURRENT_TIMESTAMP WHERE id = #{id}
+    </update>
+
+    <update id="incrementSales">
+        UPDATE service_package SET sales_count = sales_count + #{count}, update_time = CURRENT_TIMESTAMP WHERE id = #{id}
+    </update>
+
+</mapper>
