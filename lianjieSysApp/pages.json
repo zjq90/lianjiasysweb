@@ -1,0 +1,200 @@
+{
+  "pages": [
+    {
+      "path": "pages/index/index",
+      "style": {
+        "navigationBarTitleText": "首页",
+        "navigationBarBackgroundColor": "#4CAF50",
+        "navigationBarTextStyle": "white"
+      }
+    },
+    {
+      "path": "pages/service/service",
+      "style": {
+        "navigationBarTitleText": "服务",
+        "navigationBarBackgroundColor": "#4CAF50",
+        "navigationBarTextStyle": "white"
+      }
+    },
+    {
+      "path": "pages/profile/profile",
+      "style": {
+        "navigationBarTitleText": "个人",
+        "navigationBarBackgroundColor": "#4CAF50",
+        "navigationBarTextStyle": "white"
+      }
+    },
+    {
+      "path": "pages/profile/userInfo",
+      "style": {
+        "navigationBarTitleText": "个人信息",
+        "navigationBarBackgroundColor": "#4CAF50",
+        "navigationBarTextStyle": "white"
+      }
+    },
+    {
+      "path": "pages/profile/address",
+      "style": {
+        "navigationBarTitleText": "地址管理",
+        "navigationBarBackgroundColor": "#4CAF50",
+        "navigationBarTextStyle": "white"
+      }
+    },
+    {
+      "path": "pages/profile/addressForm",
+      "style": {
+        "navigationBarTitleText": "新增地址",
+        "navigationBarBackgroundColor": "#4CAF50",
+        "navigationBarTextStyle": "white"
+      }
+    },
+    {
+      "path": "pages/profile/addressDetail",
+      "style": {
+        "navigationBarTitleText": "地址详情",
+        "navigationBarBackgroundColor": "#4CAF50",
+        "navigationBarTextStyle": "white"
+      }
+    },
+    {
+      "path": "pages/profile/orders",
+      "style": {
+        "navigationBarTitleText": "服务单",
+        "navigationBarBackgroundColor": "#4CAF50",
+        "navigationBarTextStyle": "white"
+      }
+    },
+    {
+      "path": "pages/profile/about",
+      "style": {
+        "navigationBarTitleText": "关于",
+        "navigationBarBackgroundColor": "#4CAF50",
+        "navigationBarTextStyle": "white"
+      }
+    },
+    {
+      "path": "pages/service/packageList",
+      "style": {
+        "navigationBarTitleText": "套餐推荐",
+        "navigationBarBackgroundColor": "#4CAF50",
+        "navigationBarTextStyle": "white"
+      }
+    },
+    {
+      "path": "pages/service/packageDetail",
+      "style": {
+        "navigationBarTitleText": "套餐详情",
+        "navigationBarBackgroundColor": "#4CAF50",
+        "navigationBarTextStyle": "white"
+      }
+    },
+    {
+      "path": "pages/service/packageCardList",
+      "style": {
+        "navigationBarTitleText": "套餐卡管理",
+        "navigationBarBackgroundColor": "#4CAF50",
+        "navigationBarTextStyle": "white"
+      }
+    },
+    {
+      "path": "pages/service/packageCardForm",
+      "style": {
+        "navigationBarTitleText": "新增套餐卡",
+        "navigationBarBackgroundColor": "#4CAF50",
+        "navigationBarTextStyle": "white"
+      }
+    },
+    {
+      "path": "pages/service/packageCardDetail",
+      "style": {
+        "navigationBarTitleText": "套餐卡详情",
+        "navigationBarBackgroundColor": "#4CAF50",
+        "navigationBarTextStyle": "white"
+      }
+    },
+    {
+      "path": "pages/service/familyList",
+      "style": {
+        "navigationBarTitleText": "家庭档案",
+        "navigationBarBackgroundColor": "#4CAF50",
+        "navigationBarTextStyle": "white"
+      }
+    },
+    {
+      "path": "pages/service/familyForm",
+      "style": {
+        "navigationBarTitleText": "新增家庭",
+        "navigationBarBackgroundColor": "#4CAF50",
+        "navigationBarTextStyle": "white"
+      }
+    },
+    {
+      "path": "pages/service/familyDetail",
+      "style": {
+        "navigationBarTitleText": "家庭详情",
+        "navigationBarBackgroundColor": "#4CAF50",
+        "navigationBarTextStyle": "white"
+      }
+    },
+    {
+      "path": "pages/service/userList",
+      "style": {
+        "navigationBarTitleText": "用户管理",
+        "navigationBarBackgroundColor": "#4CAF50",
+        "navigationBarTextStyle": "white"
+      }
+    },
+    {
+      "path": "pages/service/userForm",
+      "style": {
+        "navigationBarTitleText": "新增用户",
+        "navigationBarBackgroundColor": "#4CAF50",
+        "navigationBarTextStyle": "white"
+      }
+    },
+    {
+      "path": "pages/service/userDetail",
+      "style": {
+        "navigationBarTitleText": "用户详情",
+        "navigationBarBackgroundColor": "#4CAF50",
+        "navigationBarTextStyle": "white"
+      }
+    }
+  ],
+  "globalStyle": {
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "恋家环保",
+    "navigationBarBackgroundColor": "#4CAF50",
+    "backgroundColor": "#F8F9FA"
+  },
+  "tabBar": {
+    "color": "#999999",
+    "selectedColor": "#4CAF50",
+    "borderStyle": "white",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/service/service",
+        "text": "服务"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "个人"
+      }
+    ]
+  },
+	"condition" : { //模式配置，仅开发期间生效
+		"current": 0, //当前激活的模式(list 的索引项)
+		"list": [
+			{
+				"name": "", //模式名称
+				"path": "", //启动页面，必选
+				"query": "" //启动参数，在页面的onLoad函数里面得到
+			}
+		]
+	}
+}

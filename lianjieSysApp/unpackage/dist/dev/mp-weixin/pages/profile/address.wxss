@@ -1,0 +1,151 @@
+
+.address-page.data-v-72eb5b25 {
+  min-height: 100vh;
+  background-color: #F8F9FA;
+  padding: 30rpx;
+  padding-bottom: 120rpx;
+}
+
+/* 卡片样式 */
+.card.data-v-72eb5b25 {
+  background-color: #FFFFFF;
+  border-radius: 16rpx;
+  margin-bottom: 24rpx;
+  overflow: hidden;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.05);
+}
+
+/* 地址列表 */
+.address-list.data-v-72eb5b25 {
+  display: flex;
+  flex-direction: column;
+}
+.address-item.data-v-72eb5b25 {
+  margin-bottom: 24rpx;
+}
+.address-header.data-v-72eb5b25 {
+  padding: 24rpx 30rpx;
+  border-bottom: 1rpx solid #F0F0F0;
+}
+.address-info.data-v-72eb5b25 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.name-phone.data-v-72eb5b25 {
+  display: flex;
+  align-items: center;
+}
+.name.data-v-72eb5b25 {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #333333;
+}
+.phone.data-v-72eb5b25 {
+  font-size: 28rpx;
+  color: #666666;
+  margin-left: 20rpx;
+}
+.address-tags.data-v-72eb5b25 {
+  display: flex;
+}
+.default-tag.data-v-72eb5b25 {
+  padding: 4rpx 16rpx;
+  background-color: #E8F5E9;
+  color: #4CAF50;
+  font-size: 20rpx;
+  border-radius: 12rpx;
+}
+.address-body.data-v-72eb5b25 {
+  padding: 20rpx 30rpx;
+  border-bottom: 1rpx solid #F0F0F0;
+}
+.address-text.data-v-72eb5b25 {
+  font-size: 26rpx;
+  color: #666666;
+  line-height: 1.6;
+}
+.address-footer.data-v-72eb5b25 {
+  padding: 16rpx 30rpx;
+  background-color: #FAFAFA;
+}
+.footer-actions.data-v-72eb5b25 {
+  display: flex;
+  justify-content: flex-end;
+}
+.action-item.data-v-72eb5b25 {
+  padding: 8rpx 20rpx;
+  margin-left: 24rpx;
+}
+.action-text.data-v-72eb5b25 {
+  font-size: 24rpx;
+  color: #4CAF50;
+}
+.action-text.delete.data-v-72eb5b25 {
+  color: #F44336;
+}
+.action-text.disabled.data-v-72eb5b25 {
+  color: #999999;
+}
+
+/* 空状态 */
+.empty.data-v-72eb5b25 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 100rpx 0;
+}
+.empty-icon.data-v-72eb5b25 {
+  font-size: 120rpx;
+  color: #999999;
+  margin-bottom: 24rpx;
+}
+.empty-text.data-v-72eb5b25 {
+  font-size: 28rpx;
+  color: #999999;
+  margin-bottom: 30rpx;
+}
+
+/* 底部固定按钮 */
+.fixed-bottom.data-v-72eb5b25 {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20rpx 30rpx;
+  background-color: #FFFFFF;
+  box-shadow: 0 -2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+.btn.data-v-72eb5b25 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20rpx 40rpx;
+  border-radius: 50rpx;
+  font-size: 28rpx;
+  font-weight: 500;
+  border: none;
+}
+.btn-primary.data-v-72eb5b25 {
+  background-color: #4CAF50;
+  color: #FFFFFF;
+}
+.btn-block.data-v-72eb5b25 {
+  width: 100%;
+}
+.btn-small.data-v-72eb5b25 {
+  padding: 12rpx 24rpx;
+  font-size: 24rpx;
+}
+.btn-icon.data-v-72eb5b25 {
+  font-size: 32rpx;
+  margin-right: 8rpx;
+}
+
+/* 安全区域 */
+.safe-area-bottom.data-v-72eb5b25 {
+  padding-bottom: calc(20rpx + constant(safe-area-inset-bottom));
+  padding-bottom: calc(20rpx + env(safe-area-inset-bottom));
+}
+

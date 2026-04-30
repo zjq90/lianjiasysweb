@@ -1,0 +1,43 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/service/service",
+    "pages/profile/profile",
+    "pages/profile/userInfo",
+    "pages/profile/address",
+    "pages/profile/orders",
+    "pages/profile/about",
+    "pages/service/packageList",
+    "pages/service/packageCardList",
+    "pages/service/familyList",
+    "pages/service/userList"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "恋家环保",
+    "navigationBarBackgroundColor": "#4CAF50",
+    "backgroundColor": "#F8F9FA"
+  },
+  "tabBar": {
+    "color": "#999999",
+    "selectedColor": "#4CAF50",
+    "borderStyle": "white",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/service/service",
+        "text": "服务"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "个人"
+      }
+    ]
+  },
+  "usingComponents": {}
+}

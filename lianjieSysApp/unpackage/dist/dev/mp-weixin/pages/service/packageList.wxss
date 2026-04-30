@@ -1,0 +1,210 @@
+
+.package-list-page.data-v-4896a47e {
+  min-height: 100vh;
+  background-color: #F8F9FA;
+  padding: 30rpx;
+}
+
+/* 搜索区域 */
+.card.data-v-4896a47e {
+  background-color: #FFFFFF;
+  border-radius: 16rpx;
+  margin-bottom: 24rpx;
+  overflow: hidden;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.05);
+}
+.search-box.data-v-4896a47e {
+  display: flex;
+  align-items: center;
+  padding: 24rpx 30rpx;
+  border-bottom: 1rpx solid #E0E0E0;
+}
+.search-input.data-v-4896a47e {
+  flex: 1;
+  height: 72rpx;
+  background-color: #F5F5F5;
+  border-radius: 36rpx;
+  padding: 0 24rpx;
+  font-size: 26rpx;
+}
+.search-btn.data-v-4896a47e {
+  width: 72rpx;
+  height: 72rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 16rpx;
+  background-color: #E8F5E9;
+  border-radius: 50%;
+}
+.search-icon.data-v-4896a47e {
+  font-size: 32rpx;
+}
+.filter-section.data-v-4896a47e {
+  display: flex;
+  padding: 20rpx 30rpx;
+  overflow-x: auto;
+}
+.filter-item.data-v-4896a47e {
+  flex-shrink: 0;
+  padding: 12rpx 28rpx;
+  margin-right: 20rpx;
+  background-color: #F5F5F5;
+  border-radius: 30rpx;
+  transition: all 0.3s ease;
+}
+.filter-item.active.data-v-4896a47e {
+  background-color: #E8F5E9;
+}
+.filter-text.data-v-4896a47e {
+  font-size: 24rpx;
+  color: #666666;
+}
+.filter-item.active .filter-text.data-v-4896a47e {
+  color: #4CAF50;
+  font-weight: 500;
+}
+
+/* 套餐列表 */
+.package-list.data-v-4896a47e {
+  display: flex;
+  flex-direction: column;
+}
+.package-item.data-v-4896a47e {
+  display: flex;
+  margin-bottom: 24rpx;
+  overflow: hidden;
+}
+.package-image.data-v-4896a47e {
+  width: 200rpx;
+  height: 200rpx;
+  flex-shrink: 0;
+  border-radius: 12rpx 0 0 12rpx;
+}
+.package-info.data-v-4896a47e {
+  flex: 1;
+  padding: 20rpx;
+  display: flex;
+  flex-direction: column;
+}
+.package-header.data-v-4896a47e {
+  margin-bottom: 12rpx;
+}
+.package-name.data-v-4896a47e {
+  display: block;
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #333333;
+  margin-bottom: 8rpx;
+}
+.package-tags.data-v-4896a47e {
+  display: flex;
+  flex-wrap: wrap;
+}
+.tag.data-v-4896a47e {
+  display: inline-block;
+  padding: 4rpx 12rpx;
+  border-radius: 12rpx;
+  font-size: 20rpx;
+  margin-right: 8rpx;
+  margin-bottom: 4rpx;
+  background-color: #E8F5E9;
+  color: #4CAF50;
+}
+.package-desc.data-v-4896a47e {
+  margin-bottom: 12rpx;
+}
+.desc-text.data-v-4896a47e {
+  font-size: 24rpx;
+  color: #999999;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.package-specs.data-v-4896a47e {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 16rpx;
+}
+.spec-item.data-v-4896a47e {
+  display: flex;
+  align-items: center;
+  margin-right: 20rpx;
+  margin-bottom: 8rpx;
+}
+.spec-label.data-v-4896a47e {
+  font-size: 22rpx;
+  color: #999999;
+}
+.spec-value.data-v-4896a47e {
+  font-size: 22rpx;
+  color: #666666;
+}
+.package-footer.data-v-4896a47e {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-top: auto;
+}
+.price-section.data-v-4896a47e {
+  display: flex;
+  align-items: baseline;
+}
+.price-label.data-v-4896a47e {
+  font-size: 24rpx;
+  color: #F44336;
+  font-weight: 500;
+}
+.price-value.data-v-4896a47e {
+  font-size: 36rpx;
+  color: #F44336;
+  font-weight: 600;
+}
+.price-original.data-v-4896a47e {
+  font-size: 22rpx;
+  color: #999999;
+  text-decoration: line-through;
+  margin-left: 12rpx;
+}
+.action-btn.data-v-4896a47e {
+  flex-shrink: 0;
+}
+.btn.data-v-4896a47e {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12rpx 24rpx;
+  border-radius: 20rpx;
+  font-size: 24rpx;
+  font-weight: 500;
+  border: none;
+}
+.btn-primary.data-v-4896a47e {
+  background-color: #4CAF50;
+  color: #FFFFFF;
+}
+.btn-small.data-v-4896a47e {
+  padding: 12rpx 24rpx;
+  font-size: 24rpx;
+}
+
+/* 空状态 */
+.empty.data-v-4896a47e {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 100rpx 0;
+}
+.empty-icon.data-v-4896a47e {
+  font-size: 120rpx;
+  color: #999999;
+  margin-bottom: 24rpx;
+}
+.empty-text.data-v-4896a47e {
+  font-size: 28rpx;
+  color: #999999;
+}
+
