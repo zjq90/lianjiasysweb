@@ -1,0 +1,94 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  font-size: 14px;
+}
+
+.el-menu-item.is-active {
+  background-color: rgba(64, 158, 255, 0.2) !important;
+}
+
+.el-table th {
+  background-color: #f5f7fa !important;
+}
+
+.page-container {
+  padding: 20px;
+  background-color: #f0f2f5;
+  min-height: calc(100vh - 60px);
+}
+
+.search-form {
+  background: #fff;
+  padding: 20px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+
+.table-container {
+  background: #fff;
+  padding: 20px;
+  border-radius: 4px;
+}
+
+.pagination-container {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.dialog-footer {
+  text-align: right;
+}
+
+.detail-container {
+  background: #fff;
+  padding: 20px;
+  border-radius: 4px;
+}
+
+.detail-row {
+  display: flex;
+  margin-bottom: 15px;
+  
+  .detail-label {
+    width: 120px;
+    text-align: right;
+    color: #909399;
+    flex-shrink: 0;
+  }
+  
+  .detail-value {
+    flex: 1;
+    color: #303133;
+    padding-left: 15px;
+  }
+}
+
+.status-tag {
+  &.status-pending {
+    background-color: #ecf5ff;
+    color: #409eff;
+  }
+  
+  &.status-success {
+    background-color: #f0f9eb;
+    color: #67c23a;
+  }
+  
+  &.status-warning {
+    background-color: #fdf6ec;
+    color: #e6a23c;
+  }
+  
+  &.status-danger {
+    background-color: #fef0f0;
+    color: #f56c6c;
+  }
+}
